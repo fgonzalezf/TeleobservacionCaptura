@@ -125,5 +125,76 @@ namespace Teleobservacion_Captura
             }
             return registro;
         }
+
+        public DataTable ConvertITableField(ITable table, string whereClause, string pFieldName)
+        {
+
+            DataTable ExpertInfo;
+            ExpertInfo = new DataTable("ExpertInfo");
+            IQueryFilter queryFilter = new QueryFilterClass();
+            queryFilter.WhereClause = whereClause; // create the where clause statement
+            try
+            {
+
+                ICursor pCursor = table.Search(queryFilter, true);
+                IRow pRow = pCursor.NextRow();
+                DataColumn column;
+                IFields pFields = table.Fields;
+                for (int i = 0; i < pCursor.Fields.FieldCount; i++)
+                {
+                    if (pFieldName == pFields.get_Field(i).Name)
+                    {
+                        column = new DataColumn();
+                        column.ColumnName = pFields.get_Field(i).AliasName;
+                        if (pFields.get_Field(i).Type == esriFieldType.esriFieldTypeString)
+                        {
+                            column.DataType = System.Type.GetType("System.String");
+                        }
+                        else if (pFields.get_Field(i).Type == esriFieldType.esriFieldTypeInteger)
+                        {
+                            column.DataType = System.Type.GetType("System.Int32");
+                        }
+                        else if (pFields.get_Field(i).Type == esriFieldType.esriFieldTypeDouble)
+                        {
+                            column.DataType = System.Type.GetType("System.Double");
+                        }
+                        else if (pFields.get_Field(i).Type == esriFieldType.esriFieldTypeDate)
+                        {
+                            column.DataType = System.Type.GetType("System.DateTime");
+                        }
+                        else if (pFields.get_Field(i).Type == esriFieldType.esriFieldTypeSingle)
+                        {
+                            column.DataType = System.Type.GetType("System.Single");
+                        }
+                        else if (pFields.get_Field(i).Type == esriFieldType.esriFieldTypeBlob)
+                        {
+                            column.DataType = System.Type.GetType("System.Byte");
+                        }
+                        column.ReadOnly = false;
+                        ExpertInfo.Columns.Add(column);
+                    }
+                }
+
+
+                while (pRow != null)
+                {
+                    DataRow pDataRow = ExpertInfo.NewRow();
+                    for (int j = 0; j < pCursor.Fields.FieldCount; j++)
+                        if (pFieldName == pCursor.Fields.get_Field(j).Name)
+                        {
+                            pDataRow[0] = pRow.get_Value(j);
+                        }
+                    ExpertInfo.Rows.Add(pDataRow);
+                    pRow = pCursor.NextRow();
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return ExpertInfo;
+        }
     }
 }

@@ -61,7 +61,9 @@
             this.txtBoxMuestraGrafica = new System.Windows.Forms.TextBox();
             this.picBoxMuestraGrafica = new System.Windows.Forms.PictureBox();
             this.tabPgProcesos = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tabpgObservaciones = new System.Windows.Forms.TabPage();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -76,8 +78,10 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tabpgObservaciones = new System.Windows.Forms.TabPage();
+            this.btnSalvar = new System.Windows.Forms.Button();
+            this.btnBusquedaAvanzada = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
             this.gpboxImagenes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gpboxDatosBasicos.SuspendLayout();
@@ -95,7 +99,7 @@
             // gpboxImagenes
             // 
             this.gpboxImagenes.Controls.Add(this.dataGridView1);
-            this.gpboxImagenes.Location = new System.Drawing.Point(12, 7);
+            this.gpboxImagenes.Location = new System.Drawing.Point(16, 45);
             this.gpboxImagenes.Name = "gpboxImagenes";
             this.gpboxImagenes.Size = new System.Drawing.Size(294, 222);
             this.gpboxImagenes.TabIndex = 0;
@@ -106,7 +110,9 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(3, 19);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(287, 200);
             this.dataGridView1.TabIndex = 1;
             // 
@@ -125,7 +131,7 @@
             this.gpboxDatosBasicos.Controls.Add(this.label3);
             this.gpboxDatosBasicos.Controls.Add(this.label2);
             this.gpboxDatosBasicos.Controls.Add(this.label1);
-            this.gpboxDatosBasicos.Location = new System.Drawing.Point(312, 7);
+            this.gpboxDatosBasicos.Location = new System.Drawing.Point(316, 45);
             this.gpboxDatosBasicos.Name = "gpboxDatosBasicos";
             this.gpboxDatosBasicos.Size = new System.Drawing.Size(350, 247);
             this.gpboxDatosBasicos.TabIndex = 1;
@@ -134,40 +140,41 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(287, 72);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(312, 71);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 20);
+            this.button1.Size = new System.Drawing.Size(29, 20);
             this.button1.TabIndex = 12;
             this.button1.Text = "...";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(123, 157);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(156, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(180, 20);
             this.dateTimePicker1.TabIndex = 11;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(123, 130);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(156, 20);
+            this.textBox4.Size = new System.Drawing.Size(180, 20);
             this.textBox4.TabIndex = 10;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(123, 103);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(156, 20);
+            this.textBox3.Size = new System.Drawing.Size(180, 20);
             this.textBox3.TabIndex = 9;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(123, 72);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(156, 20);
+            this.textBox2.Size = new System.Drawing.Size(180, 20);
             this.textBox2.TabIndex = 8;
             // 
             // comboBox1
@@ -175,14 +182,14 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(123, 44);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(156, 21);
+            this.comboBox1.Size = new System.Drawing.Size(180, 21);
             this.comboBox1.TabIndex = 7;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(123, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 20);
+            this.textBox1.Size = new System.Drawing.Size(180, 20);
             this.textBox1.TabIndex = 6;
             // 
             // label6
@@ -245,7 +252,7 @@
             this.tabCtrlOtros.Controls.Add(this.tabPgMuestraGrafica);
             this.tabCtrlOtros.Controls.Add(this.tabPgProcesos);
             this.tabCtrlOtros.Controls.Add(this.tabpgObservaciones);
-            this.tabCtrlOtros.Location = new System.Drawing.Point(12, 260);
+            this.tabCtrlOtros.Location = new System.Drawing.Point(16, 298);
             this.tabCtrlOtros.Name = "tabCtrlOtros";
             this.tabCtrlOtros.SelectedIndex = 0;
             this.tabCtrlOtros.Size = new System.Drawing.Size(650, 197);
@@ -398,6 +405,15 @@
             this.tabPgProcesos.Text = "Procesamiento";
             this.tabPgProcesos.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(35, 78);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Procesamiento";
+            // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(123, 6);
@@ -406,10 +422,20 @@
             this.textBox5.Size = new System.Drawing.Size(513, 159);
             this.textBox5.TabIndex = 0;
             // 
+            // tabpgObservaciones
+            // 
+            this.tabpgObservaciones.Location = new System.Drawing.Point(4, 22);
+            this.tabpgObservaciones.Name = "tabpgObservaciones";
+            this.tabpgObservaciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabpgObservaciones.Size = new System.Drawing.Size(642, 171);
+            this.tabpgObservaciones.TabIndex = 3;
+            this.tabpgObservaciones.Text = "Observaciones";
+            this.tabpgObservaciones.UseVisualStyleBackColor = true;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.bindingNavigator1);
-            this.panel1.Location = new System.Drawing.Point(12, 229);
+            this.panel1.Location = new System.Drawing.Point(16, 267);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(294, 25);
             this.panel1.TabIndex = 3;
@@ -450,6 +476,7 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Agregar nuevo";
+            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.bindingNavigatorAddNewItem_Click);
             // 
             // bindingNavigatorCountItem
             // 
@@ -527,30 +554,51 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // label11
+            // btnSalvar
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 78);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(77, 13);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Procesamiento";
+            this.btnSalvar.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvar.Image")));
+            this.btnSalvar.Location = new System.Drawing.Point(20, 6);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(38, 38);
+            this.btnSalvar.TabIndex = 4;
+            this.btnSalvar.UseVisualStyleBackColor = true;
             // 
-            // tabpgObservaciones
+            // btnBusquedaAvanzada
             // 
-            this.tabpgObservaciones.Location = new System.Drawing.Point(4, 22);
-            this.tabpgObservaciones.Name = "tabpgObservaciones";
-            this.tabpgObservaciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabpgObservaciones.Size = new System.Drawing.Size(642, 171);
-            this.tabpgObservaciones.TabIndex = 3;
-            this.tabpgObservaciones.Text = "Observaciones";
-            this.tabpgObservaciones.UseVisualStyleBackColor = true;
+            this.btnBusquedaAvanzada.Image = ((System.Drawing.Image)(resources.GetObject("btnBusquedaAvanzada.Image")));
+            this.btnBusquedaAvanzada.Location = new System.Drawing.Point(64, 6);
+            this.btnBusquedaAvanzada.Name = "btnBusquedaAvanzada";
+            this.btnBusquedaAvanzada.Size = new System.Drawing.Size(38, 38);
+            this.btnBusquedaAvanzada.TabIndex = 5;
+            this.btnBusquedaAvanzada.UseVisualStyleBackColor = true;
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
+            this.btnCerrar.Location = new System.Drawing.Point(108, 6);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(38, 38);
+            this.btnCerrar.TabIndex = 6;
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Image = ((System.Drawing.Image)(resources.GetObject("btnAyuda.Image")));
+            this.btnAyuda.Location = new System.Drawing.Point(628, 6);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(38, 38);
+            this.btnAyuda.TabIndex = 7;
+            this.btnAyuda.UseVisualStyleBackColor = true;
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 469);
+            this.ClientSize = new System.Drawing.Size(678, 511);
+            this.Controls.Add(this.btnAyuda);
+            this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.btnBusquedaAvanzada);
+            this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabCtrlOtros);
             this.Controls.Add(this.gpboxDatosBasicos);
@@ -629,5 +677,9 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabpgObservaciones;
+        private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.Button btnBusquedaAvanzada;
+        private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.Button btnAyuda;
     }
 }
