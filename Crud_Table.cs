@@ -15,6 +15,9 @@ namespace Teleobservacion_Captura
             try
             {
                 IRow pRow = pTable.CreateRow();
+                pRow.set_Value(1,Convert.ToInt16(pRow.get_Value(0))+366);
+                pRow.set_Value(2, Convert.ToInt16(pRow.get_Value(0)) + 365);
+                pRow.Store();
 
             }
             catch (Exception Ex)
@@ -24,13 +27,23 @@ namespace Teleobservacion_Captura
 
         }
 
-        public void updateRow (ITable pTable,string id)
+        public void updateRow (ITable pTable, Dictionary<string, string> rowUpdate)
         {
             try
             {
                 IQueryFilter pQuery = new QueryFilterClass();
-                pQuery.WhereClause=
+                pQuery.WhereClause = "[OBJECTID_1]=" + rowUpdate["OBJECTID_1"];
                 ICursor pCursor = pTable.Update(pQuery, true);
+                IRow pRow = pCursor.NextRow();
+                foreach (KeyValuePair<string, string> kvp in rowUpdate)
+                {
+                    if (kvp.Key != "OBJECTID_1")
+                    {
+                        pRow.set_Value(pRow.Fields.FindField(kvp.Key), kvp.Value);
+                        pRow.Store();
+                    }
+                    
+                }
             }
             catch (Exception Ex)
             {
@@ -41,6 +54,10 @@ namespace Teleobservacion_Captura
         {
             try
             {
+                IQueryFilter pQuery = new QueryFilterClass();
+                pQuery.WhereClause = "[OBJECTID_1]=" + id;
+                pTable.DeleteSearchedRows(pQuery);
+
             }
             catch (Exception Ex)
             {

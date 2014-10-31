@@ -33,13 +33,13 @@
             this.gpboxImagenes = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gpboxDatosBasicos = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnArchivo = new System.Windows.Forms.Button();
+            this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
+            this.tbxArea = new System.Windows.Forms.TextBox();
+            this.tbxResolucionEspacial = new System.Windows.Forms.TextBox();
+            this.tbxArchivo = new System.Windows.Forms.TextBox();
+            this.cbxTipo = new System.Windows.Forms.ComboBox();
+            this.tbxNombre = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,14 +62,12 @@
             this.picBoxMuestraGrafica = new System.Windows.Forms.PictureBox();
             this.tabPgProcesos = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txbProcesamiento = new System.Windows.Forms.TextBox();
             this.tabpgObservaciones = new System.Windows.Forms.TabPage();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -78,10 +76,14 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnBusquedaAvanzada = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
+            this.lblProceso = new System.Windows.Forms.Label();
+            this.txbObservaciones = new System.Windows.Forms.TextBox();
             this.gpboxImagenes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gpboxDatosBasicos.SuspendLayout();
@@ -90,6 +92,7 @@
             this.tabPgMuestraGrafica.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxMuestraGrafica)).BeginInit();
             this.tabPgProcesos.SuspendLayout();
+            this.tabpgObservaciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
@@ -108,23 +111,25 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Location = new System.Drawing.Point(3, 19);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(287, 200);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // gpboxDatosBasicos
             // 
-            this.gpboxDatosBasicos.Controls.Add(this.button1);
-            this.gpboxDatosBasicos.Controls.Add(this.dateTimePicker1);
-            this.gpboxDatosBasicos.Controls.Add(this.textBox4);
-            this.gpboxDatosBasicos.Controls.Add(this.textBox3);
-            this.gpboxDatosBasicos.Controls.Add(this.textBox2);
-            this.gpboxDatosBasicos.Controls.Add(this.comboBox1);
-            this.gpboxDatosBasicos.Controls.Add(this.textBox1);
+            this.gpboxDatosBasicos.Controls.Add(this.btnArchivo);
+            this.gpboxDatosBasicos.Controls.Add(this.dateTimePickerFecha);
+            this.gpboxDatosBasicos.Controls.Add(this.tbxArea);
+            this.gpboxDatosBasicos.Controls.Add(this.tbxResolucionEspacial);
+            this.gpboxDatosBasicos.Controls.Add(this.tbxArchivo);
+            this.gpboxDatosBasicos.Controls.Add(this.cbxTipo);
+            this.gpboxDatosBasicos.Controls.Add(this.tbxNombre);
             this.gpboxDatosBasicos.Controls.Add(this.label6);
             this.gpboxDatosBasicos.Controls.Add(this.label5);
             this.gpboxDatosBasicos.Controls.Add(this.label4);
@@ -138,59 +143,61 @@
             this.gpboxDatosBasicos.TabStop = false;
             this.gpboxDatosBasicos.Text = "Datos Básicos";
             // 
-            // button1
+            // btnArchivo
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(312, 71);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(29, 20);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "...";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArchivo.Location = new System.Drawing.Point(312, 71);
+            this.btnArchivo.Name = "btnArchivo";
+            this.btnArchivo.Size = new System.Drawing.Size(29, 20);
+            this.btnArchivo.TabIndex = 12;
+            this.btnArchivo.Text = "...";
+            this.btnArchivo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnArchivo.UseVisualStyleBackColor = true;
+            this.btnArchivo.Click += new System.EventHandler(this.btnArchivo_Click);
             // 
-            // dateTimePicker1
+            // dateTimePickerFecha
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(123, 157);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(180, 20);
-            this.dateTimePicker1.TabIndex = 11;
+            this.dateTimePickerFecha.Location = new System.Drawing.Point(123, 157);
+            this.dateTimePickerFecha.Name = "dateTimePickerFecha";
+            this.dateTimePickerFecha.Size = new System.Drawing.Size(180, 20);
+            this.dateTimePickerFecha.TabIndex = 11;
             // 
-            // textBox4
+            // tbxArea
             // 
-            this.textBox4.Location = new System.Drawing.Point(123, 130);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(180, 20);
-            this.textBox4.TabIndex = 10;
+            this.tbxArea.Location = new System.Drawing.Point(123, 130);
+            this.tbxArea.Name = "tbxArea";
+            this.tbxArea.Size = new System.Drawing.Size(180, 20);
+            this.tbxArea.TabIndex = 10;
             // 
-            // textBox3
+            // tbxResolucionEspacial
             // 
-            this.textBox3.Location = new System.Drawing.Point(123, 103);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(180, 20);
-            this.textBox3.TabIndex = 9;
+            this.tbxResolucionEspacial.Location = new System.Drawing.Point(123, 103);
+            this.tbxResolucionEspacial.Name = "tbxResolucionEspacial";
+            this.tbxResolucionEspacial.Size = new System.Drawing.Size(180, 20);
+            this.tbxResolucionEspacial.TabIndex = 9;
             // 
-            // textBox2
+            // tbxArchivo
             // 
-            this.textBox2.Location = new System.Drawing.Point(123, 72);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(180, 20);
-            this.textBox2.TabIndex = 8;
+            this.tbxArchivo.Enabled = false;
+            this.tbxArchivo.Location = new System.Drawing.Point(123, 72);
+            this.tbxArchivo.Name = "tbxArchivo";
+            this.tbxArchivo.Size = new System.Drawing.Size(180, 20);
+            this.tbxArchivo.TabIndex = 8;
             // 
-            // comboBox1
+            // cbxTipo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(123, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(180, 21);
-            this.comboBox1.TabIndex = 7;
+            this.cbxTipo.FormattingEnabled = true;
+            this.cbxTipo.Location = new System.Drawing.Point(123, 44);
+            this.cbxTipo.Name = "cbxTipo";
+            this.cbxTipo.Size = new System.Drawing.Size(180, 21);
+            this.cbxTipo.TabIndex = 7;
             // 
-            // textBox1
+            // tbxNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(123, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
-            this.textBox1.TabIndex = 6;
+            this.tbxNombre.Location = new System.Drawing.Point(123, 19);
+            this.tbxNombre.Name = "tbxNombre";
+            this.tbxNombre.Size = new System.Drawing.Size(180, 20);
+            this.tbxNombre.TabIndex = 6;
             // 
             // label6
             // 
@@ -280,7 +287,7 @@
             // 
             this.txtBoxLongitudMax.Decimals = ((byte)(0));
             this.txtBoxLongitudMax.DecSeparator = '.';
-            this.txtBoxLongitudMax.Format = TextBoxConFormato.tbFormats.SignedFixedPointNumber;
+            this.txtBoxLongitudMax.Format = TextBoxConFormato.tbFormats.SignedFloatingPointNumber;
             this.txtBoxLongitudMax.Location = new System.Drawing.Point(340, 102);
             this.txtBoxLongitudMax.Name = "txtBoxLongitudMax";
             this.txtBoxLongitudMax.Size = new System.Drawing.Size(100, 20);
@@ -291,7 +298,7 @@
             // 
             this.txtBoxLongitudMin.Decimals = ((byte)(0));
             this.txtBoxLongitudMin.DecSeparator = '.';
-            this.txtBoxLongitudMin.Format = TextBoxConFormato.tbFormats.SignedFixedPointNumber;
+            this.txtBoxLongitudMin.Format = TextBoxConFormato.tbFormats.SignedFloatingPointNumber;
             this.txtBoxLongitudMin.Location = new System.Drawing.Point(222, 102);
             this.txtBoxLongitudMin.Name = "txtBoxLongitudMin";
             this.txtBoxLongitudMin.Size = new System.Drawing.Size(100, 20);
@@ -302,7 +309,7 @@
             // 
             this.txtBoxLatitudMax.Decimals = ((byte)(0));
             this.txtBoxLatitudMax.DecSeparator = '.';
-            this.txtBoxLatitudMax.Format = TextBoxConFormato.tbFormats.SignedFixedPointNumber;
+            this.txtBoxLatitudMax.Format = TextBoxConFormato.tbFormats.SignedFloatingPointNumber;
             this.txtBoxLatitudMax.Location = new System.Drawing.Point(340, 72);
             this.txtBoxLatitudMax.Name = "txtBoxLatitudMax";
             this.txtBoxLatitudMax.Size = new System.Drawing.Size(100, 20);
@@ -313,7 +320,7 @@
             // 
             this.txtBoxLatitudMin.Decimals = ((byte)(0));
             this.txtBoxLatitudMin.DecSeparator = '.';
-            this.txtBoxLatitudMin.Format = TextBoxConFormato.tbFormats.SignedFixedPointNumber;
+            this.txtBoxLatitudMin.Format = TextBoxConFormato.tbFormats.SignedFloatingPointNumber;
             this.txtBoxLatitudMin.Location = new System.Drawing.Point(223, 72);
             this.txtBoxLatitudMin.Name = "txtBoxLatitudMin";
             this.txtBoxLatitudMin.Size = new System.Drawing.Size(100, 20);
@@ -341,7 +348,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(169, 105);
+            this.label8.Location = new System.Drawing.Point(168, 105);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 1;
@@ -377,6 +384,7 @@
             this.btnExaminarMG.TabIndex = 2;
             this.btnExaminarMG.Text = "Examinar";
             this.btnExaminarMG.UseVisualStyleBackColor = true;
+            this.btnExaminarMG.Click += new System.EventHandler(this.btnExaminarMG_Click);
             // 
             // txtBoxMuestraGrafica
             // 
@@ -390,13 +398,14 @@
             this.picBoxMuestraGrafica.Location = new System.Drawing.Point(74, 6);
             this.picBoxMuestraGrafica.Name = "picBoxMuestraGrafica";
             this.picBoxMuestraGrafica.Size = new System.Drawing.Size(280, 159);
+            this.picBoxMuestraGrafica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxMuestraGrafica.TabIndex = 0;
             this.picBoxMuestraGrafica.TabStop = false;
             // 
             // tabPgProcesos
             // 
             this.tabPgProcesos.Controls.Add(this.label11);
-            this.tabPgProcesos.Controls.Add(this.textBox5);
+            this.tabPgProcesos.Controls.Add(this.txbProcesamiento);
             this.tabPgProcesos.Location = new System.Drawing.Point(4, 22);
             this.tabPgProcesos.Name = "tabPgProcesos";
             this.tabPgProcesos.Padding = new System.Windows.Forms.Padding(3);
@@ -414,16 +423,17 @@
             this.label11.TabIndex = 1;
             this.label11.Text = "Procesamiento";
             // 
-            // textBox5
+            // txbProcesamiento
             // 
-            this.textBox5.Location = new System.Drawing.Point(123, 6);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(513, 159);
-            this.textBox5.TabIndex = 0;
+            this.txbProcesamiento.Location = new System.Drawing.Point(123, 6);
+            this.txbProcesamiento.Multiline = true;
+            this.txbProcesamiento.Name = "txbProcesamiento";
+            this.txbProcesamiento.Size = new System.Drawing.Size(513, 159);
+            this.txbProcesamiento.TabIndex = 0;
             // 
             // tabpgObservaciones
             // 
+            this.tabpgObservaciones.Controls.Add(this.txbObservaciones);
             this.tabpgObservaciones.Location = new System.Drawing.Point(4, 22);
             this.tabpgObservaciones.Name = "tabpgObservaciones";
             this.tabpgObservaciones.Padding = new System.Windows.Forms.Padding(3);
@@ -442,9 +452,10 @@
             // 
             // bindingNavigator1
             // 
-            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator1.DeleteItem = null;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -468,31 +479,12 @@
             this.bindingNavigator1.TabIndex = 0;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Agregar nuevo";
-            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.bindingNavigatorAddNewItem_Click);
-            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(38, 22);
             this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Eliminar";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -554,6 +546,26 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Agregar nuevo";
+            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.bindingNavigatorAddNewItem_Click);
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Eliminar";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
+            // 
             // btnSalvar
             // 
             this.btnSalvar.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvar.Image")));
@@ -562,6 +574,7 @@
             this.btnSalvar.Size = new System.Drawing.Size(38, 38);
             this.btnSalvar.TabIndex = 4;
             this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnBusquedaAvanzada
             // 
@@ -580,6 +593,7 @@
             this.btnCerrar.Size = new System.Drawing.Size(38, 38);
             this.btnCerrar.TabIndex = 6;
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // btnAyuda
             // 
@@ -590,11 +604,28 @@
             this.btnAyuda.TabIndex = 7;
             this.btnAyuda.UseVisualStyleBackColor = true;
             // 
+            // lblProceso
+            // 
+            this.lblProceso.AutoSize = true;
+            this.lblProceso.Location = new System.Drawing.Point(521, 298);
+            this.lblProceso.Name = "lblProceso";
+            this.lblProceso.Size = new System.Drawing.Size(0, 13);
+            this.lblProceso.TabIndex = 8;
+            // 
+            // txbObservaciones
+            // 
+            this.txbObservaciones.Location = new System.Drawing.Point(6, 9);
+            this.txbObservaciones.Multiline = true;
+            this.txbObservaciones.Name = "txbObservaciones";
+            this.txbObservaciones.Size = new System.Drawing.Size(630, 156);
+            this.txbObservaciones.TabIndex = 1;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 511);
+            this.Controls.Add(this.lblProceso);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnBusquedaAvanzada);
@@ -617,6 +648,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxMuestraGrafica)).EndInit();
             this.tabPgProcesos.ResumeLayout(false);
             this.tabPgProcesos.PerformLayout();
+            this.tabpgObservaciones.ResumeLayout(false);
+            this.tabpgObservaciones.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -624,6 +657,7 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -631,13 +665,13 @@
 
         private System.Windows.Forms.GroupBox gpboxImagenes;
         private System.Windows.Forms.GroupBox gpboxDatosBasicos;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnArchivo;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFecha;
+        private System.Windows.Forms.TextBox tbxArea;
+        private System.Windows.Forms.TextBox tbxResolucionEspacial;
+        private System.Windows.Forms.TextBox tbxArchivo;
+        private System.Windows.Forms.ComboBox cbxTipo;
+        private System.Windows.Forms.TextBox tbxNombre;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -674,12 +708,14 @@
         private System.Windows.Forms.Button btnExaminarMG;
         private System.Windows.Forms.TextBox txtBoxMuestraGrafica;
         private System.Windows.Forms.PictureBox picBoxMuestraGrafica;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txbProcesamiento;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabpgObservaciones;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnBusquedaAvanzada;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.Label lblProceso;
+        private System.Windows.Forms.TextBox txbObservaciones;
     }
 }
