@@ -39,8 +39,11 @@ namespace Teleobservacion_Captura
                 {
                     if (kvp.Key != "OBJECTID_1")
                     {
-                        pRow.set_Value(pRow.Fields.FindField(kvp.Key), kvp.Value);
-                        pRow.Store();
+                        if (kvp.Value != "")
+                        {
+                            pRow.set_Value(pRow.Fields.FindField(kvp.Key), kvp.Value);
+                            pRow.Store();
+                        }
                     }
                     
                 }

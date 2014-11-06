@@ -191,6 +191,7 @@
             this.cbxTipo.Name = "cbxTipo";
             this.cbxTipo.Size = new System.Drawing.Size(180, 21);
             this.cbxTipo.TabIndex = 7;
+            this.cbxTipo.SelectedIndexChanged += new System.EventHandler(this.cbxTipo_SelectedIndexChanged);
             // 
             // tbxNombre
             // 
