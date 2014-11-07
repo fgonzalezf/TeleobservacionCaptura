@@ -119,7 +119,78 @@ namespace Teleobservacion_Captura
         private void datosFila(DataGridViewRow row)
         {
             tbxNombre.Text = row.Cells[4].Value.ToString();
-            cbxTipo.Text = row.Cells[5].Value.ToString();
+
+
+            if (row.Cells[5].Value.ToString() == "RADAR")
+            {
+                cbxTipo.SelectedIndex = 1;
+            }
+            else if (row.Cells[5].Value.ToString() == "LANDSAT TM")
+            {
+                cbxTipo.SelectedIndex = 2;
+            }
+            else if (row.Cells[5].Value.ToString() == "LANDSAT ETM")
+            {
+                cbxTipo.SelectedIndex = 3;
+            }
+            else if (row.Cells[5].Value.ToString() == "SPOT")
+            {
+                cbxTipo.SelectedIndex = 4;
+            }
+            else if (row.Cells[5].Value.ToString() == "IKONOS")
+            {
+                cbxTipo.SelectedIndex = 5;
+            }
+            else if (row.Cells[5].Value.ToString() == "ORTOFOTO")
+            {
+                cbxTipo.SelectedIndex = 6;
+            }
+            else if (row.Cells[5].Value.ToString() == "ASTER")
+            {
+                cbxTipo.SelectedIndex = 7;
+            }
+            else
+            {
+                cbxTipo.SelectedIndex = 0;
+            }
+
+
+            if (cbxTipoRadar != null)
+            {
+                if (row.Cells[19].Value.ToString() == "1")
+                {
+                    cbxTipoRadar.SelectedIndex = 1;
+                    
+                }
+                else if (row.Cells[19].Value.ToString() == "2")
+                {
+                    cbxTipoRadar.SelectedIndex = 2;
+                }
+                else
+                {
+                    cbxTipoRadar.SelectedIndex = 0;
+                }
+            }
+
+
+            if (txbIdentificador != null)
+            {
+                txbIdentificador.Text = row.Cells[3].Value.ToString();
+            }
+            if (txbPath != null)
+            {
+                txbPath.Text = row.Cells[16].Value.ToString();
+            }
+            if (txbRow != null)
+            {
+                txbRow.Text = row.Cells[17].Value.ToString();
+            }
+            if (txbLineaVuelo != null)
+            {
+                txbLineaVuelo.Text = row.Cells[18].Value.ToString();
+            }
+            txbObservaciones.Text = row.Cells[14].Value.ToString();
+        
             tbxArchivo.Text = row.Cells[12].Value.ToString();
             tbxResolucionEspacial.Text = row.Cells[13].Value.ToString();
             tbxArea.Text = row.Cells[7].Value.ToString();
@@ -249,6 +320,9 @@ namespace Teleobservacion_Captura
                     IGPUtilities pGPUtilities = new GPUtilitiesClass();
                     ITable pTable = pGPUtilities.OpenTableFromString(@"E:\SICAT\TELEOBSERVACION\TeleObservacion.mdb\F03IMG_IMGN_100K");
                     Crud.updateRow(pTable, DatosActualizar);
+                    Table_To_DataTable tabla = new Table_To_DataTable();
+                    bindingSource1.DataSource = tabla.ConvertITable(pTable, "");   
+
                     
                 }
                else if(dialogResult == DialogResult.No)
@@ -256,7 +330,9 @@ namespace Teleobservacion_Captura
                       lblProceso.Text = "";
                       btnSalvar.Enabled = true;
                     }
-                    
+                
+                
+                   
 
             }
 
@@ -294,7 +370,14 @@ namespace Teleobservacion_Captura
             datos.Add("OBJECTID_1", OBJETID);
             datos.Add("OBJECTID", OBJETID_1);
             datos.Add("ID_IMGN", IDImagen);
-            datos.Add("IMG_IDENT","");
+            if (txbIdentificador != null)
+            {
+                datos.Add("IMG_IDENT", txbIdentificador.Text);
+            }
+            else
+            {
+                datos.Add("IMG_IDENT", ""); 
+            }
             datos.Add("IMG_NOMBRE", tbxNombre.Text);
             datos.Add("IMG_TIPO_IMGN", cbxTipo.Text);
             datos.Add("IMG_FECHA", dateTimePickerFecha.Value.ToString());
@@ -307,13 +390,54 @@ namespace Teleobservacion_Captura
             datos.Add("IMG_RESL_ESPC", tbxResolucionEspacial.Text);
             datos.Add("IMG_OBSRV", txbObservaciones.Text);
             datos.Add("IMG_PROCS", txbProcesamiento.Text);
-            datos.Add("IMG_PATH","");
-            datos.Add("IMG_ROW","");
-            datos.Add("IMG_LINEA_VUELO","");
-            datos.Add("PST_TIPO_RADAR",cbxTipo.Text);
+
+
+            txbLineaVuelo = null;
+            txbIdentificador = null;
+            cbxTipoRadar = null;       
+            txbPath = null;           
+            txbRow = null;
+            txbObservaciones = null;
+            if (txbPath != null)
+            {
+                datos.Add("IMG_PATH", txbPath.Text);
+                datos.Add("IMG_ROW", txbRow.Text);
+            }
+            else
+            {
+                datos.Add("IMG_PATH", "");
+                datos.Add("IMG_ROW", "");
+            }
+            if (txbLineaVuelo != null)
+            {
+                datos.Add("IMG_LINEA_VUELO", txbLineaVuelo.Text);
+            }
+            else
+            {
+                datos.Add("IMG_LINEA_VUELO", "");
+            }
+            if (cbxTipoRadar != null)
+            {
+                if (cbxTipoRadar.Text == "Radarsat1")
+                {
+                    datos.Add("PST_TIPO_RADAR", "1");
+                }
+                else if (cbxTipoRadar.Text == "Radarsat2")
+                {
+                    datos.Add("PST_TIPO_RADAR", "2");
+                }
+                else
+                {
+                    datos.Add("PST_TIPO_RADAR", "0");
+                }
+            }
+            else
+            {
+                datos.Add("PST_TIPO_RADAR", "0");
+            }
             datos.Add("IMG_MUEST_GRAF", txtBoxMuestraGrafica.Text);
-            datos.Add("IMG_ULTIMO_USUARIO","");
-            datos.Add("IMG_ULTIMA_FECHA", dateTimePickerFecha.Value.ToString());
+            datos.Add("IMG_ULTIMO_USUARIO",System.Environment.UserName);
+            datos.Add("IMG_ULTIMA_FECHA", DateTime.Today.ToString());
             datos.Add("IMG_ORBIT","");
             datos.Add("IMG_TIPO_ORBIT","");
             datos.Add("IMG_BEAM_MODE","");
@@ -532,6 +656,8 @@ namespace Teleobservacion_Captura
             }
 
         }
+
+        
 
         
 

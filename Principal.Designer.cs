@@ -64,6 +64,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txbProcesamiento = new System.Windows.Forms.TextBox();
             this.tabpgObservaciones = new System.Windows.Forms.TabPage();
+            this.txbObservaciones = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -83,7 +84,6 @@
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.lblProceso = new System.Windows.Forms.Label();
-            this.txbObservaciones = new System.Windows.Forms.TextBox();
             this.gpboxImagenes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gpboxDatosBasicos.SuspendLayout();
@@ -443,6 +443,14 @@
             this.tabpgObservaciones.Text = "Observaciones";
             this.tabpgObservaciones.UseVisualStyleBackColor = true;
             // 
+            // txbObservaciones
+            // 
+            this.txbObservaciones.Location = new System.Drawing.Point(6, 9);
+            this.txbObservaciones.Multiline = true;
+            this.txbObservaciones.Name = "txbObservaciones";
+            this.txbObservaciones.Size = new System.Drawing.Size(630, 156);
+            this.txbObservaciones.TabIndex = 1;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.bindingNavigator1);
@@ -612,14 +620,6 @@
             this.lblProceso.Name = "lblProceso";
             this.lblProceso.Size = new System.Drawing.Size(0, 13);
             this.lblProceso.TabIndex = 8;
-            // 
-            // txbObservaciones
-            // 
-            this.txbObservaciones.Location = new System.Drawing.Point(6, 9);
-            this.txbObservaciones.Multiline = true;
-            this.txbObservaciones.Name = "txbObservaciones";
-            this.txbObservaciones.Size = new System.Drawing.Size(630, 156);
-            this.txbObservaciones.TabIndex = 1;
             // 
             // Principal
             // 
